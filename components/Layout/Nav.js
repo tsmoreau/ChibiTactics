@@ -7,225 +7,6 @@ import { useWeb3React } from "@web3-react/core";
 import { Popover } from "@headlessui/react";
 import Alert from "./Alert";
 
-function SourceDropdown() {
-  return (
-    <div className="text-xl mx-2 text-base text-th-primary-dark">
-      <a href="/source">
-        <div className="font-[100] tracking-wide  w-full text-left  text-xl flex items-center transition ease-in-out hover:-translate-y-0.5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            className="mx-1 mt-0.5 text-cyan-300"
-            stroke="#A8202C"
-            fill="#A8202C"
-            stroke-width="1"
-          >
-            <path d="M22 2v20h-20v-20h20zm2-2h-24v24h24v-24z" />
-          </svg>
-          Source
-        </div>
-      </a>
-      <Popover className="hidden relative">
-        <Popover.Button className="font-thin tracking-wide  w-full text-left  text-xl flex items-center transition ease-in-out hover:-translate-y-0.5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            className="mx-1 mt-0.5 text-cyan-300"
-            stroke="#A8202C"
-            fill="#A8202C"
-            stroke-width="1"
-          >
-            <path d="M22 2v20h-20v-20h20zm2-2h-24v24h24v-24z" />
-          </svg>
-          Source
-        </Popover.Button>
-
-        <Popover.Panel className="font-thin tracking-wide  rounded text-xl z-40 w-48 -translate-x-0  translate-y-3 border absolute z-10 bg-th-background">
-          <div className="flex flex-col">
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/source/#shop"
-            >
-              Shop
-            </a>
-
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/source/#tokens"
-            >
-              Tokens
-            </a>
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/source/#downloads"
-            >
-              Downloads
-            </a>
-          </div>
-        </Popover.Panel>
-      </Popover>
-    </div>
-  );
-}
-
-function PulseDropdown() {
-  return (
-    <div className="font-thin tracking-wide  text-xl mx-2 text-base text-th-primary-dark">
-      <Popover className="relative">
-        <Popover.Button className="font-thin tracking-wide  w-full text-left  text-xl flex items-center transition ease-in-out hover:-translate-y-0.5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            className="mx-1 mt-0 text-cyan-300"
-            stroke="none"
-            fill="#EA6D37"
-          >
-            <path d="M12 0l-11 6v12l11 6 11-6v-12l-11-6zm-9 16.813v-9.626l9-4.908 9 4.908v9.626l-9 4.909-9-4.909z" />
-          </svg>
-          Pulse
-        </Popover.Button>
-
-        <Popover.Panel className="font-thin tracking-wide rounded  text-xl z-40  w-48 translate-x-0  translate-y-3 border absolute z-10 bg-th-background">
-          <div className="flex flex-col">
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/pulse#news"
-            >
-              News
-            </a>
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/pulse#podcast"
-            >
-              Podcast
-            </a>
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/pulse#emailupdates"
-            >
-              Email Updates
-            </a>
-          </div>
-        </Popover.Panel>
-      </Popover>
-    </div>
-  );
-}
-
-function PathDropdown() {
-  return (
-    <div className="font-thin tracking-wide  text-xl mx-2 text-base text-th-primary-dark">
-      <a href="/path">
-        <button className=" font-thin tracking-wide  w-full text-left  text-xl flex items-center transition ease-in-out hover:-translate-y-0.5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            className="mx-1 mt-0 text-cyan-300"
-            stroke="none"
-            fill="#F9B700"
-          >
-            <path d="M12 5.887l8.468 14.113h-16.936l8.468-14.113zm0-3.887l-12 20h24l-12-20z" />
-          </svg>
-          Path
-        </button>
-      </a>
-      <Popover className="relative hidden">
-        <Popover.Button className=" font-thin tracking-wide  w-full text-left  text-xl flex items-center transition ease-in-out hover:-translate-y-0.5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            className="mx-1 mt-0 text-cyan-300"
-            stroke="none"
-            fill="#F9B700"
-          >
-            <path d="M12 5.887l8.468 14.113h-16.936l8.468-14.113zm0-3.887l-12 20h24l-12-20z" />
-          </svg>
-          Path
-        </Popover.Button>
-
-        <Popover.Panel className="font-thin tracking-wide rounded  text-xl z-40 border border-ygg-purple-300 w-48 absolute -translate-x-0 translate-y-3 z-40 bg-th-background">
-          <div className="flex flex-col ">
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/path/#about"
-            >
-              About
-            </a>
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/path#team"
-            >
-              Team
-            </a>
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/path#faq"
-            >
-              FAQ
-            </a>
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/path#roadmap"
-            >
-              Roadmap
-            </a>
-          </div>
-        </Popover.Panel>
-      </Popover>
-    </div>
-  );
-}
-
-function VibeDropdown() {
-  return (
-    <div className="font-thin tracking-wide  text-xl mx-2 text-base text-th-primary-dark">
-      <Popover className="relative">
-        <Popover.Button className="font-thin tracking-wide w-full text-left text-xl flex items-center transition ease-in-out hover:-translate-y-0.5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            className="mx-1 mt-0.5 text-cyan-300 rotate-45"
-            stroke="none"
-            fill="#609336"
-          >
-            <path d="M22 2v20h-20v-20h20zm2-2h-24v24h24v-24z" />
-          </svg>
-          Vibe
-        </Popover.Button>
-
-        <Popover.Panel className="font-thin tracking-wide rounded  text-xl z-40 border border-ygg-purple-300 w-48 absolute -translate-x-0 translate-y-3 z-40 bg-th-background">
-          <div className="flex flex-col ">
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/web3/drops/yggdrasil"
-            >
-              Community
-            </a>
-            <a
-              className="w-full py-4 hover:bg-th-primary-light "
-              href="/web3/drops/anthropos"
-            >
-              Music
-            </a>
-          </div>
-        </Popover.Panel>
-      </Popover>
-    </div>
-  );
-}
-
 export default function IndexPage() {
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
@@ -285,9 +66,34 @@ export default function IndexPage() {
   }
 
   function ProfileDropdown() {
-    return <Account triedToEagerConnect={triedToEagerConnect} />;
-  }
+    return (
+      <Popover className="relative">
+        <Popover.Button className="flex mt-0.5  items-center translate-x-0 translate-y-0  ">
+          <Account triedToEagerConnect={triedToEagerConnect} />
+        </Popover.Button>
 
+        <Popover.Panel className="font-thin tracking-wide rounded z-40 font-nunito text-xl text-th-primary-dark rounded-lg border border-th-accent-light w-48 absolute right-0 translate-y-4 z-10 bg-th-background">
+          <div className="flex flex-col">
+            <a className="w-full py-4 hover:bg-th-primary-light " href="/">
+              Profile
+            </a>
+            <a className="w-full py-4 hover:bg-th-primary-light " href="/">
+              Tokens
+            </a>
+            <button
+              className="w-full py-4 hover:bg-th-primary-light font-thin tracking-wide"
+              onClick={() => {
+                disconnect();
+                console.log(active);
+              }}
+            >
+              Disconnect
+            </button>
+          </div>
+        </Popover.Panel>
+      </Popover>
+    );
+  }
   return (
     <>
       <div className="h-full w-full ">
@@ -313,8 +119,8 @@ export default function IndexPage() {
                     <div className="flex items-center justify-between w-full">
                       <div className="flex items-center">
                         <a href="/">
-                          <div className="-mb-2 w-48">
-                            <Logo />
+                          <div className="-mb-2 w-48 font-nunito">
+                            CHIBI TACTICS
                           </div>
                         </a>
                       </div>
@@ -354,18 +160,10 @@ export default function IndexPage() {
                     </div>
                   </div>
                   <ul className="f-m-m">
-                    <li className="pt-10 text-gray-800 py-4 text-center font-futurapt text-xl">
-                      <SourceDropdown />
-                    </li>
-                    <li className="hidden text-gray-800 py-4 text-center font-futurapt text-xl">
-                      <PulseDropdown />
-                    </li>
-                    <li className="text-gray-800 py-4 text-center font-futurapt text-xl">
-                      <PathDropdown />
-                    </li>
-                    <li className="hidden text-gray-800 py-4 text-center font-futurapt text-xl">
-                      <VibeDropdown />
-                    </li>
+                    <li className="pt-10 text-gray-800 py-4 text-center font-futurapt text-xl"></li>
+                    <li className="hidden text-gray-800 py-4 text-center font-futurapt text-xl"></li>
+                    <li className="text-gray-800 py-4 text-center font-futurapt text-xl"></li>
+                    <li className="hidden text-gray-800 py-4 text-center font-futurapt text-xl"></li>
 
                     <li className="mt-8 ml-9 flex mx-auto items-center"></li>
                     <li className="text-gray-800 mt-3 h-full flex mx-auto text-center justify-center">
@@ -402,8 +200,8 @@ export default function IndexPage() {
             <div>
               <div className="font-molle text-2xl h-16 pt-0.5 bg-th-background px-6 w-full flex lg:hidden justify-between items-center  top-0 z-40">
                 <a href="/">
-                  <div className="-mb-1 w-56 -ml-4 mr-4">
-                    <Logo />
+                  <div className="-mb-1 w-56 -ml-4 mr-4 font-nunito">
+                    CHIBI TACTICS
                   </div>
                 </a>
                 <div className="flex items-center">
@@ -503,17 +301,14 @@ export default function IndexPage() {
               className={
                 isShrunk
                   ? "h-16 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-th-background top-0 z-40"
-                  : "h-24 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-th-background top-0 z-40"
+                  : "h-20 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-th-background top-0 z-40"
               }
             >
               <div className="flex h-10  translate-y-0">
-                <a href="/" className="w-72 mb-0">
-                  <Logo />
+                <a href="/" className="text-4xl ml-8 mb-0 font-nunito">
+                  CHIBI TACTICS
                 </a>
-                <div className="font-futurapt text-xl w-min flex mx-auto p-2  ">
-                  <SourceDropdown />
-                  <PathDropdown />
-                </div>
+                <div className="font-futurapt text-xl w-min flex mx-auto p-2  "></div>
               </div>
               {isConnected ? (
                 <div className="text-th-primary-dark flex items-center">

@@ -53,7 +53,7 @@ const Account = ({ triedToEagerConnect }) => {
       <div>
         {hasMetaMaskOrWeb3Available ? (
           <button
-            className="font-futurapt text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium"
+            className="font-nunito text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium"
             onClick={() => {
               setConnecting(true);
 
@@ -73,7 +73,7 @@ const Account = ({ triedToEagerConnect }) => {
           </button>
         ) : (
           <button
-            className="text-th-primary-dark font-futurapt font-thin text-xl"
+            className="text-th-primary-dark font-nunito font-thin text-xl"
             onClick={() => onboarding.current?.startOnboarding()}
           >
             Install Metamask
@@ -84,8 +84,20 @@ const Account = ({ triedToEagerConnect }) => {
   }
 
   return (
-    <div className="font-thin flex tracking-wide  font-futurapt text-xl text-white px-5 pb-0.5 pt-0.5 border-2 bg-th-accent-light border-th-accent-light hover:bg-th-primary-medium">
-      {ENSName || `${shortenHex(account, 4)}`}
+    <div className="font-thin flex tracking-wide  font-nunito text-xl text-white px-5 py-0.5 pt-0.5 border-2 bg-th-accent-light border-th-accent-light hover:bg-th-primary-medium">
+      {ENSName || `${shortenHex(account, 4)}`} |{" "}
+      <svg
+        width="12"
+        height="12"
+        xmlns="http://www.w3.org/2000/svg"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        viewBox="0 0 24 24"
+        className="-mr-2 ml-1 text-th-primary-dark mt-2"
+        stroke="white"
+      >
+        <path d="M23.245 4l-11.245 14.374-11.219-14.374-.781.619 12 15.381 12-15.391-.755-.609z" />
+      </svg>
     </div>
   );
 };
