@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+
+@import url("https://use.typekit.net/pcf5uvh.css");
+
+@layer base {
+  @font-face {
+    font-family: Anthro;
+    font-weight: 400;
+    src: url(/fonts/AnthromancerRegular2.otf) format("otf");
+  }
+
+  @font-face {
+    font-family: Futura;
+    font-weight: 400;
+    src: url(/fonts/futura-pt-book.otf) format("otf");
+  }
+
+  @font-face {
+    font-family: Nunito;
+    font-weight: 400;
+    src: url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+  }
+
+  @font-face {
+    font-family: futura-pt, sans-serif;
+
+    font-weight: 300;
+
+    font-style: normal;
+    src: url("https://use.typekit.net/pcf5uvh.css");
+  }
+}
+
+:root {
+  --background: theme("colors.black");
+  --background-secondary: theme("colors.white");
+
+  --accent-dark: theme("colors.yggpurple.300");
+  --accent-medium: theme("colors.yggpurple.500");
+  --accent-light: theme("colors.yggpurple.300");
+  --shadow: theme("colors.slate.300");
+  --custom-light: theme("colors.purple.400");
+
+  --primary-dark: theme("colors.white");
+  --primary-medium: theme("colors.yggpurple.500");
+  --primary-light: theme("colors.yggpurple.300");
+}
+
+[data-theme="light"] {
+  --background: theme("colors.white");
+  --background-secondary: theme("colors.black");
+
+  --accent-dark: theme("colors.sky.900");
+  --accent-medium: theme("colors.sky.700");
+  --accent-light: theme("colors.sky.500");
+  --shadow: theme("colors.sky.500");
+  --custom-light: theme("colors.sky.600");
+
+  --primary-dark: theme("colors.slate.700");
+  --primary-medium: theme("colors.sky.300");
+  --primary-light: theme("colors.sky.100");
+}
+
+[data-theme="emerald"] {
+  --background: theme("colors.white");
+
+  --accent-dark: theme("colors.emerald.900");
+  --accent-medium: theme("colors.emerald.700");
+  --accent-light: theme("colors.emerald.500");
+}
+
+[data-theme="pink"] {
+  --background: theme("colors.gray.900");
+  --background-secondary: theme("colors.gray.800");
+
+  --accent-dark: theme("colors.pink.900");
+  --accent-medium: theme("colors.pink.700");
+  --accent-light: theme("colors.pink.500");
+
+  --primary-dark: theme("colors.gray.300");
+  --primary-medium: theme("colors.gray.200");
+  --primary-light: theme("colors.gray.100");
+}

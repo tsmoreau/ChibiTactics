@@ -1,2 +1,1 @@
-# ChibiTactics
-Created with CodeSandbox
+# Anthromancer
