@@ -13,6 +13,7 @@ module.exports = withAnimations({
         "128": "32rem",
         "136": "34rem",
         "144": "36rem",
+        "152": "40rem",
         "156": "50rem"
       },
       colors: {
@@ -68,7 +69,11 @@ module.exports = withAnimations({
         anthro: ["Anthro"],
         futura: ["Futura"],
         futurapt: ["futura-pt"],
-        nunito: ["Nunito"]
+        nunito: ["Nunito"],
+        gyparody: ["gyparody"],
+        lores: [" lores-12-narrow"],
+        gyparodysemi: ["gyparodysemi"],
+        mali: ["Mali"]
       }
     }
   },

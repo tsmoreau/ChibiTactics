@@ -72,16 +72,22 @@ export default function IndexPage() {
           <Account triedToEagerConnect={triedToEagerConnect} />
         </Popover.Button>
 
-        <Popover.Panel className="font-thin tracking-wide rounded z-40 font-nunito text-xl text-th-primary-dark rounded-lg border border-th-accent-light w-48 absolute right-0 translate-y-4 z-10 bg-th-background">
+        <Popover.Panel className="font-thin tracking-wide rounded z-40 font-lores font-normal text-xl text-th-primary-dark rounded-lg border border-th-accent-light w-48 absolute right-0 translate-y-4 z-10 bg-th-background">
           <div className="flex flex-col">
-            <a className="w-full py-4 hover:bg-th-primary-light " href="/">
+            <a
+              className="w-full py-4 hover:bg-green-200 hover:text-white "
+              href="/"
+            >
               Profile
             </a>
-            <a className="w-full py-4 hover:bg-th-primary-light " href="/">
+            <a
+              className="w-full py-4 hover:bg-green-200 hover:text-white "
+              href="/"
+            >
               Tokens
             </a>
             <button
-              className="w-full py-4 hover:bg-th-primary-light font-thin tracking-wide"
+              className="w-full py-4 hover:bg-green-200 hover:text-white font-thin tracking-wide"
               onClick={() => {
                 disconnect();
                 console.log(active);
@@ -119,9 +125,9 @@ export default function IndexPage() {
                     <div className="flex items-center justify-between w-full">
                       <div className="flex items-center">
                         <a href="/">
-                          <div className="-mb-2 w-48 font-nunito">
-                            CHIBI TACTICS
-                          </div>
+                          <p className="text-3xl   mb-0 bg-gradient-to-b from-green-400  to-emerald-600 text-transparent bg-clip-text font-gyparody tracking-tight font-extrabold">
+                            CHIBI TACTICS!
+                          </p>
                         </a>
                       </div>
                       <div
@@ -200,12 +206,14 @@ export default function IndexPage() {
             <div>
               <div className="font-molle text-2xl h-16 pt-0.5 bg-th-background px-6 w-full flex lg:hidden justify-between items-center  top-0 z-40">
                 <a href="/">
-                  <div className="-mb-1 w-56 -ml-4 mr-4 font-nunito">
-                    CHIBI TACTICS
-                  </div>
+                  <a href="/">
+                    <p className="text-3xl   mb-0 bg-gradient-to-b from-green-400  to-emerald-600 text-transparent bg-clip-text font-gyparody tracking-tight font-extrabold">
+                      CHIBI TACTICS!
+                    </p>
+                  </a>
                 </a>
                 <div className="flex items-center">
-                  <div className="relative mr-4 "></div>
+                  <div className="relative "></div>
                   <div
                     id="menu"
                     className="text-gray-800 translate-x-3 translate-y-0.5"
@@ -304,16 +312,32 @@ export default function IndexPage() {
                   : "h-20 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-th-background top-0 z-40"
               }
             >
-              <div className="flex h-10  translate-y-0">
-                <a href="/" className="text-4xl ml-8 mb-0 font-nunito">
-                  CHIBI TACTICS
+              <div className="flex ml-2 flex-col h-10 items-center justify-center translate-y-0">
+                <a href="/">
+                  <p className="text-5xl drop-shadow-sm mb-0 bg-gradient-to-b from-green-400  to-emerald-600 text-transparent bg-clip-text font-gyparody tracking-tight font-extrabold">
+                    CHIBI TACTICS!
+                  </p>
+                  <div className="hidden bg-emerald-500  h-px w-11/12 flex mx-auto"></div>
+                  <p className="hidden w-full flex mx-auto justify-center text-center  text-xs mb-0 text-emerald-600 font-gyparody font-extrabold tracking-wide">
+                    ON-CHAIN TURN-BASED STRATEGY
+                  </p>
                 </a>
-                <div className="font-futurapt text-xl w-min flex mx-auto p-2  "></div>
               </div>
               {isConnected ? (
                 <div className="text-th-primary-dark flex items-center">
+                  <div className="rounded-full h-8 w-8 mr-2 mt-1  border-emerald-500 items-center flex mx-auto justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      className="fill-emerald-500 "
+                    >
+                      <path d="M15 21c0 1.598-1.392 3-2.971 3s-3.029-1.402-3.029-3h6zm.137-17.055c-.644-.374-1.042-1.07-1.041-1.82v-.003c.001-1.172-.938-2.122-2.096-2.122s-2.097.95-2.097 2.122v.003c.001.751-.396 1.446-1.041 1.82-4.668 2.709-1.985 11.715-6.862 13.306v1.749h20v-1.749c-4.877-1.591-2.193-10.598-6.863-13.306zm-3.137-2.945c.552 0 1 .449 1 1 0 .552-.448 1-1 1s-1-.448-1-1c0-.551.448-1 1-1zm-6.451 16c1.189-1.667 1.605-3.891 1.964-5.815.447-2.39.869-4.648 2.354-5.509 1.38-.801 2.956-.76 4.267 0 1.485.861 1.907 3.119 2.354 5.509.359 1.924.775 4.148 1.964 5.815h-12.903z" />{" "}
+                    </svg>
+                  </div>
                   <ProfileDropdown />
-                  <div className="translate-x-1">
+                  <div className="translate-x-1 hidden">
                     <Switcher />
                   </div>
                 </div>
@@ -335,6 +359,23 @@ export default function IndexPage() {
       </div>
       <style jsx>{`
 
+  @font-face {
+    font-family: gyparody;
+
+    font-weight: 900;
+
+    font-style: normal;
+    src: url("https://use.typekit.net/jdq8vah.css");
+  }
+
+  @font-face {
+    font-family: gyparody;
+    font-weight: 400;
+    font-style: normal;
+
+    src: url("https://use.typekit.net/jdq8vah.css");
+  }
+       @import url('https://fonts.googleapis.com/css2?family=Mali:500&display=swap');
 @font-face {
   font-family: Futura;
   src: url(/fonts/futura-pt-book.otf);

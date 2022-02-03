@@ -2,18 +2,20 @@ import { Fragment, useState, useEffect } from "react";
 import { verifyMessage } from "@ethersproject/wallet";
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
-import Link from "next/link";
-import Account from "../components/Utils/Account";
 import Nav from "../components/Layout/Nav";
 import Footer from "../components/Layout/Footer";
+import Map from "../components/Samples/Map";
 import "animate.css/animate.min.css";
-import { Controller, Scene } from "react-scrollmagic";
+
 import { Tween, Timeline } from "react-gsap";
+import {
+  TransformWrapper,
+  TransformComponent
+} from "@tiendeo/react-zoom-pan-pinch";
 
 import ETHBalance from "../components/Utils/ETHBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
 import usePersonalSign, { hexlify } from "../hooks/usePersonalSign";
-import ScrollAnimation from "react-animate-on-scroll";
 import ScrollToTop from "react-scroll-to-top";
 import { Dialog, Transition } from "@headlessui/react";
 
@@ -93,7 +95,7 @@ export default function Home() {
           <button
             type="button"
             onClick={openPlayModal}
-            className="px-5 py-2 text-lg items-center font-medium text-white bg-emerald-400 rounded-md border focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            className="border border-1.5 border-stone-300 font-lores font-normal px-5 py-2 text-lg items-center font-medium text-white bg-gradient-to-b from-green-400  to-emerald-500 rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
           >
             PLAY
           </button>
@@ -167,9 +169,9 @@ export default function Home() {
           <button
             type="button"
             onClick={openClaimModal}
-            className="px-5 py-2 text-lg items-center font-medium text-white bg-emerald-400 rounded-md border focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            className="border border-1.5 border-stone-300 font-lores font-normal px-5 py-2 text-lg items-center font-medium text-white bg-gradient-to-b from-green-400  to-emerald-500 rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
           >
-            CLAIM PACK
+            CLAIM STARTER PACK
           </button>
         </div>
 
@@ -189,7 +191,7 @@ export default function Home() {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Dialog.Overlay className="fixed inset-0" />
+                <Dialog.Overlay className="fixed inset-0 bg-white/80" />
               </Transition.Child>
 
               {/* This element is to trick the browser into centering the modal contents. */}
@@ -208,21 +210,42 @@ export default function Home() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                  CLAIM PACK
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
+                <div className="  inline-block w-full max-w-3xl px-1 lg:p-6 pt-8 pb-8 my-1 lg:my-8 overflow-hidden text-center align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                  <p className="text-4xl font-gyparody font-black  drop-shadow-sm text-transparent tracking-tight bg-clip-text bg-gradient-to-b from-green-400 to-emerald-600">
+                    CLAIM STARTER PACK
+                  </p>
+                  <div className="mt-0">
+                    <p className="leading-snug font-lores font-normal text-lg py-4 leading-snug px-2 lg:px-24 text-gray-900">
+                      Free To Mint Launch Starter Packs available through the
+                      end of June 2022. The Launch Starter Pack has Exclusive
+                      Characters and Card Traits, which will only be available
+                      during Launch!
+                      <br />
+                      <br />
+                      Limit One Pack Per Address.
                     </p>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-3 space-y-1 lg:space-y-0 w-3/4 lg:w-1/2 flex flex-col lg:flex-row mx-auto justify-center">
                     <button
                       type="button"
-                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      onClick={openClaimModal}
+                      className="border border-1.5 border-stone-300 font-lores font-normal px-5 py-1 text-lg items-center font-medium text-white bg-gradient-to-b from-green-400  to-emerald-500 rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                    >
+                      CLAIM MY PACK!
+                    </button>
+                    <button
+                      type="button"
+                      onClick={openClaimModal}
+                      className="border border-1.5 border-stone-300 font-lores font-normal px-5 py-1 text-lg items-center font-medium text-white bg-gradient-to-b from-green-400  to-emerald-500 rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                    >
+                      ABOUT CARD PACKS
+                    </button>
+                    <button
+                      type="button"
+                      className="hidden inline-flex justify-center px-4 py-2 text-xs font-medium text-green-900 bg-green-100 border border-transparent rounded-md hover:bg-green-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                       onClick={closeClaimModal}
                     >
-                      Got it, thanks!
+                      WHAT ARE PACKS AGAIN?
                     </button>
                   </div>
                 </div>
@@ -241,9 +264,9 @@ export default function Home() {
           <button
             type="button"
             onClick={openBuyModal}
-            className="px-5 py-2 text-lg items-center font-medium text-white bg-emerald-400 rounded-md border focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            className="border border-1.5 border-stone-300 font-lores font-normal px-5 py-2 text-lg items-center font-medium text-white bg-gradient-to-b from-green-400  to-emerald-500 rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
           >
-            BUY PACK
+            BUY BOOSTER PACK
           </button>
         </div>
 
@@ -282,21 +305,34 @@ export default function Home() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                  BUY PACK
+                <div className="font-nunito inline-block w-full max-w-3xl p-6 my-8 overflow-hidden text-center align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                  <p className="text-4xl">BUY BOOSTER PACK</p>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
+                    <p className="text-lg py-4 px-10 text-gray-900">
+                      Chibi Tactics Pack 00
                     </p>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 space-x-3  flex mx-auto justify-center">
                     <button
                       type="button"
-                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                      onClick={closeBuyModal}
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-green-900 bg-green-100 border border-transparent rounded-md hover:bg-green-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      onClick={closeClaimModal}
                     >
-                      Got it, thanks!
+                      CLAIM MY PACK!
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-green-900 bg-green-100 border border-transparent rounded-md hover:bg-green-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      onClick={closeClaimModal}
+                    >
+                      ABOUT LAUNCH EXCLUSIVES
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-green-900 bg-green-100 border border-transparent rounded-md hover:bg-green-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      onClick={closeClaimModal}
+                    >
+                      WHAT ARE PACKS AGAIN?
                     </button>
                   </div>
                 </div>
@@ -313,6 +349,7 @@ export default function Home() {
       <Head>
         <title>CHIBI TACTICS</title>
         <link rel="icon" href="/favicon.png" />
+        <link rel="stylesheet" href="https://use.typekit.net/jdq8vah.css" />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
@@ -328,8 +365,99 @@ export default function Home() {
       </div>
       <div className="h-0 w-full bg-lime-300 invisible">Spacer</div>
 
-      <div className="relative h-144 w-full bg-sky-300 ">
-        <div className="font-nunito absolute bottom-6 space-x-2 flex justify-center inset-x-0">
+      <div className="relative h-152 overflow-hidden flex justify-center w-full bg-gradient-to-b from-sky-200 via-sky-200 to-sky-400">
+        <TransformWrapper
+          centerZoomedOut={true}
+          initialScale={1}
+          minScale={0.5}
+          maxScale={10}
+          defaultPositionX={200}
+          defaultPositionY={100}
+          centerOnInit
+          limitToBounds={false}
+          className="border border-8 border-purple-400"
+        >
+          {({ zoomIn, zoomOut, resetTransform, setTransform, ...rest }) => (
+            <>
+              <div className="h-min mt-36 flex grid gap-0.5 grid-rows-8 grid-cols-8 ml-12 spacing-x-3 absolute right-4 inset-y-0 z-50">
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+                <div className="h-2 w-2 bg-slate-500"></div>
+              </div>
+
+              <div className="mt-24 ml-12 spacing-x-3 absolute right-4 inset-y-0 z-50">
+                <button onClick={() => zoomIn(1)}>+</button>
+                <button onClick={() => zoomOut(1)}>-</button>
+                <button onClick={() => resetTransform()}>x</button>
+                <button onClick={() => setTransform(-2900, -600, 5)}>Y</button>
+
+                <button onClick={() => setTransform(-3260, -745, 5)}>A</button>
+                <button onClick={() => setTransform(-3620, -890, 5)}>B</button>
+              </div>
+              <div className="relative object-center flex w-full mx-auto justify-center h-152 object-cover mt-8">
+                <TransformComponent centerOnInit>
+                  <div className="mt-12">
+                    <Map className="" />
+                    <div className="w-screen border h-full invisible">
+                      space
+                    </div>
+                  </div>
+                </TransformComponent>
+                <div className="absolute bottom-0"></div>
+              </div>
+              <div className="absolute text-xs left-12 bottom-12 border rounded-md px-2 py-1 font-nunito text-white">
+                <p className="mt-0 font-gyparodysemi">Game Id: 1209</p>
+                <p className="-mt-1">Turn #: 24</p>
+                <p className="-mt-1">Player 1: 0xy98whfoi982398h3v4knwlef92</p>
+                <p className="-mt-1">Player 2: 0x082j49782hf02j4gf08223f892</p>
+              </div>
+            </>
+          )}
+        </TransformWrapper>
+
+        <div className="font-nunito absolute bottom-6 space-x-0 lg:space-x-2 space-y-2 lg:space-y-0 flex flex-col lg:flex-row items-center justify-center inset-x-0">
           <div className="">
             <PlayModal />
           </div>
@@ -342,15 +470,82 @@ export default function Home() {
         </div>
       </div>
       <div className="w-full justify-center  flex flex-col items-center">
-        <div className="h-96 rounded-md w-3/4 bg-emerald-300 mt-4">Spacer</div>
-        <div className="h-96 rounded-md w-3/4 bg-emerald-300 mt-4">Spacer</div>
-        <div className="h-96 rounded-md w-3/4 bg-emerald-300 mt-4">Spacer</div>
+        <div className="h-96 rounded-md w-3/4 p-5 bg-gradient-to-b from-green-400 to-emerald-500 mt-4">
+          <p className="font-gyparody font-bold text-white text-6xl mt-8 w-full flex-mx-auto text-center justify-center">
+            On-Chain.
+            <br />
+            Turn-Based.
+            <br />
+            Strategy Game.
+          </p>
+        </div>
+        <div className="h-96 rounded-md w-3/4 bg-gradient-to-b from-green-400 to-emerald-500 mt-4">
+          <p className="font-gyparody font-bold text-white text-6xl mt-8 w-full flex-mx-auto text-center justify-center">
+            equip characters.
+            <br />
+            fight Battles.
+            <br />
+            win NFTs.
+            <br />
+            repeat.
+          </p>
+        </div>
+        <div className="h-96 rounded-md w-3/4 bg-gradient-to-b from-green-400 to-emerald-500 mt-4">
+          <p className="font-gyparody font-bold text-white text-6xl mt-8 w-full flex-mx-auto text-center justify-center">
+            Launch Starter Packs.
+            <br />
+            Free To Mint.
+            <br />
+            Available Through June.
+          </p>
+        </div>
       </div>
 
       <Footer />
       <style jsx>{`
         #title {
-          font-family: Futura;
+          font-family: gyparody;
+        }
+
+        @font-face {
+          font-family: gyparody;
+
+          font-weight: 900;
+
+          font-style: normal;
+          src: url("https://use.typekit.net/jdq8vah.css");
+        }
+
+        @font-face {
+          font-family: gyparody;
+
+          font-weight: 900;
+
+          font-style: normal;
+          src: url("https://use.typekit.net/jdq8vah.css");
+        }
+
+        @font-face {
+          font-family: gyparody;
+          font-weight: 400;
+          font-style: normal;
+
+          src: url("https://use.typekit.net/jdq8vah.css");
+        }
+
+        @font-face {
+          font-family: gyparody;
+          font-weight: 700;
+          font-style: normal;
+
+          src: url("https://use.typekit.net/jdq8vah.css");
+        }
+
+        @font-face {
+          font-family: lores-12-narrow, sans-serif;
+          font-weight: 400;
+          font-style: normal;
+          src: url("https://use.typekit.net/jdq8vah.css");
         }
 
         @font-face {
