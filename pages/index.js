@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect, useRef } from "react";
+import { Fragment, useState, useEffect, useRef, useLayoutEffect } from "react";
 import { verifyMessage } from "@ethersproject/wallet";
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
@@ -362,6 +362,39 @@ export default function Home() {
     );
   }
 
+  const testd = [
+    {
+      w: 2.5,
+      h: 1.75,
+      step: 1
+    },
+    {
+      w: 2.5,
+      h: 1.75,
+      step: 2
+    },
+    {
+      w: 2.5,
+      h: 1.75,
+      step: 3
+    },
+    {
+      w: 2.5,
+      h: 1.75,
+      step: 4
+    },
+    {
+      w: 2.5,
+      h: 1.75,
+      step: 5
+    },
+    {
+      w: 2.5,
+      h: 1.75,
+      step: 6
+    }
+  ];
+
   const ref = useRef(null);
 
   useEffect(() => {
@@ -413,7 +446,7 @@ export default function Home() {
               <div className="font-lores text-slate-400 spacing-x-3 absolute right-2 top-4 z-50">
                 <button onClick={() => resetTransform()}>X</button>
               </div>
-              <div className="absolute right-6  top-6 z-50 flex grid gap-0.5 grid-rows-8 grid-cols-8 ml-12 spacing-x-3 z-50">
+              <div className="absolute right-6  top-6 z-30 flex grid gap-0.5 grid-rows-8 grid-cols-8 ml-12 spacing-x-3 z-50">
                 <button
                   onClick={() =>
                     setTransform(
@@ -422,8 +455,9 @@ export default function Home() {
                       5
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
                 />
+
                 {/* X + 2.5 \ Y + 1.5 */}
                 <div
                   onClick={() =>
@@ -433,7 +467,7 @@ export default function Home() {
                       5
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
                 ></div>
                 {/* X + 2.5 \ Y + 1.5 */}
                 <div
@@ -444,7 +478,7 @@ export default function Home() {
                       5
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
                 ></div>
                 <div
                   onClick={() =>
@@ -454,7 +488,7 @@ export default function Home() {
                       5
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
                 ></div>
                 <div
                   onClick={() =>
@@ -464,7 +498,7 @@ export default function Home() {
                       5
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
                 ></div>
                 <div
                   onClick={() =>
@@ -474,7 +508,7 @@ export default function Home() {
                       5
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
                 ></div>
                 <div
                   onClick={() =>
@@ -484,7 +518,7 @@ export default function Home() {
                       5
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
                 ></div>
                 <div
                   onClick={() =>
@@ -494,7 +528,7 @@ export default function Home() {
                       5
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
                 ></div>
                 <div
                   onClick={() =>
@@ -504,7 +538,7 @@ export default function Home() {
                       5
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
                 ></div>
                 <div
                   onClick={() =>
@@ -514,9 +548,71 @@ export default function Home() {
                       5
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
                 ></div>
                 <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 2)),
+                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 2)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 3)),
+                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 3)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 1)),
+                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 1)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 1)),
+                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 1)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 1)),
+                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 1)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 1)),
+                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 1)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
+                ></div>
+                {/* Zoom TEN */}
+                <div
+                  className="hidden"
                   onClick={() =>
                     setTransform(
                       -((ref.current.offsetWidth / 10) * (20 * 2.25)),
@@ -526,7 +622,9 @@ export default function Home() {
                   }
                   className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
                 ></div>
+                {/* Zoom 20 */}
                 <div
+                  className="hidden"
                   onClick={() =>
                     setTransform(
                       -((ref.current.offsetWidth / 10) * 95),
@@ -534,7 +632,7 @@ export default function Home() {
                       20
                     )
                   }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                  className="hidden hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
                 ></div>
               </div>
 
@@ -547,13 +645,10 @@ export default function Home() {
                     </div>
                   </div>
                 </TransformComponent>
-                <div className="absolute bottom-0"></div>
-              </div>
-              <div className="absolute hidden text-xs left-12 bottom-16 border rounded-md px-2 py-1 font-nunito text-white">
-                <p className="mt-0 font-gyparodysemi">Game Id: 1209</p>
-                <p className="-mt-1">Turn #: 24</p>
-                <p className="-mt-1">Player 1: 0xy98whfoi982398h3v4knwlef92</p>
-                <p className="-mt-1">Player 2: 0x082j49782hf02j4gf08223f892</p>
+                <div className="absolute top-4 text-slate-400  left-2 font-gyparody font-semibold">
+                  <p className="mt-0">Game Id: 1209</p>
+                  <p className="-mt-1">Turn #: 24</p>
+                </div>
               </div>
             </>
           )}
@@ -612,33 +707,7 @@ export default function Home() {
 
         @font-face {
           font-family: gyparody;
-
-          font-weight: 900;
-
-          font-style: normal;
-          src: url("https://use.typekit.net/jdq8vah.css");
-        }
-
-        @font-face {
-          font-family: gyparody;
-
-          font-weight: 900;
-
-          font-style: normal;
-          src: url("https://use.typekit.net/jdq8vah.css");
-        }
-
-        @font-face {
-          font-family: gyparody;
           font-weight: 400;
-          font-style: normal;
-
-          src: url("https://use.typekit.net/jdq8vah.css");
-        }
-
-        @font-face {
-          font-family: gyparody;
-          font-weight: 700;
           font-style: normal;
 
           src: url("https://use.typekit.net/jdq8vah.css");

@@ -308,11 +308,11 @@ export default function IndexPage() {
             <nav
               className={
                 isShrunk
-                  ? "h-16 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-th-background top-0 z-40"
-                  : "h-20 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-th-background top-0 z-40"
+                  ? "h-16 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-th-background top-0 z-50"
+                  : "h-20 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-th-background top-0 z-50"
               }
             >
-              <div className="flex ml-2 flex-col h-10 items-center justify-center translate-y-0">
+              <div className="flex -ml-4 flex-col h-10 items-center justify-center translate-y-0">
                 <a href="/">
                   <p className="text-5xl drop-shadow-sm mb-0 bg-gradient-to-b from-green-400  to-emerald-600 text-transparent bg-clip-text font-gyparody tracking-tight font-extrabold">
                     CHIBI TACTICS!
