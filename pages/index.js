@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import { verifyMessage } from "@ethersproject/wallet";
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
@@ -344,6 +344,30 @@ export default function Home() {
     );
   }
 
+  function MapPiece() {
+    return <></>;
+  }
+
+  function App() {
+    const users = ["user1", "user2", "user3"];
+    const final = [];
+
+    for (let user of users) {
+      final.push(<li key={user}>{user}</li>);
+    }
+    return (
+      <div className="App">
+        <ul>{final}</ul>
+      </div>
+    );
+  }
+
+  const ref = useRef(null);
+
+  useEffect(() => {
+    console.log("width", ref.current.offsetWidth);
+  }, []);
+
   return (
     <div className="bg-th-background w-screen justify-center h-full relative">
       <Head>
@@ -363,82 +387,160 @@ export default function Home() {
       <div className="absolute top-0 z-50 w-full">
         <Nav />
       </div>
-      <div className="h-0 w-full bg-lime-300 invisible">Spacer</div>
+      <div className="h-16 w-full bg-lime-300 invisible">Spacer</div>
 
       <div className="relative h-152 overflow-hidden flex justify-center w-full bg-gradient-to-b from-sky-200 via-sky-200 to-sky-400">
         <TransformWrapper
           centerZoomedOut={true}
           initialScale={1}
           minScale={0.5}
-          maxScale={10}
-          defaultPositionX={200}
-          defaultPositionY={100}
+          maxScale={20}
+          defaultPositionX={0}
+          defaultPositionY={0}
           centerOnInit
           limitToBounds={false}
           className="border border-8 border-purple-400"
         >
-          {({ zoomIn, zoomOut, resetTransform, setTransform, ...rest }) => (
+          {({
+            zoomIn,
+            zoomOut,
+            resetTransform,
+            setTransform,
+            zoomToElement,
+            ...rest
+          }) => (
             <>
-              <div className="h-min mt-36 flex grid gap-0.5 grid-rows-8 grid-cols-8 ml-12 spacing-x-3 absolute right-4 inset-y-0 z-50">
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
-                <div className="h-2 w-2 bg-slate-500"></div>
+              <div className="font-lores text-slate-400 spacing-x-3 absolute right-2 top-4 z-50">
+                <button onClick={() => resetTransform()}>X</button>
+              </div>
+              <div className="absolute right-6  top-6 z-50 flex grid gap-0.5 grid-rows-8 grid-cols-8 ml-12 spacing-x-3 z-50">
+                <button
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * 20),
+                      -((ref.current.offsetHeight / 10) * 5),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                />
+                {/* X + 2.5 \ Y + 1.5 */}
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 1)),
+                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 1)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
+                {/* X + 2.5 \ Y + 1.5 */}
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 2)),
+                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 2)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 3)),
+                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 3)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 4)),
+                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 4)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 5)),
+                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 5)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 6)),
+                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 6)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 7)),
+                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 7)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * 17.5),
+                      -((ref.current.offsetHeight / 10) * 6.75),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 1)),
+                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 1)),
+                      5
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * (20 * 2.25)),
+                      -((ref.current.offsetHeight / 10) * (5 * 2.75)),
+                      10
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
+                <div
+                  onClick={() =>
+                    setTransform(
+                      -((ref.current.offsetWidth / 10) * 95),
+                      -((ref.current.offsetHeight / 10) * 31),
+                      20
+                    )
+                  }
+                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
+                ></div>
               </div>
 
-              <div className="mt-24 ml-12 spacing-x-3 absolute right-4 inset-y-0 z-50">
-                <button onClick={() => zoomIn(1)}>+</button>
-                <button onClick={() => zoomOut(1)}>-</button>
-                <button onClick={() => resetTransform()}>x</button>
-                <button onClick={() => setTransform(-2900, -600, 5)}>Y</button>
-
-                <button onClick={() => setTransform(-3260, -745, 5)}>A</button>
-                <button onClick={() => setTransform(-3620, -890, 5)}>B</button>
-              </div>
-              <div className="relative object-center flex w-full mx-auto justify-center h-152 object-cover mt-8">
+              <div className="relative object-center flex w-full mx-auto justify-center h-152 object-cover ">
                 <TransformComponent centerOnInit>
-                  <div className="mt-12">
+                  <div ref={ref} className="">
                     <Map className="" />
                     <div className="w-screen border h-full invisible">
                       space
@@ -447,7 +549,7 @@ export default function Home() {
                 </TransformComponent>
                 <div className="absolute bottom-0"></div>
               </div>
-              <div className="absolute text-xs left-12 bottom-12 border rounded-md px-2 py-1 font-nunito text-white">
+              <div className="absolute hidden text-xs left-12 bottom-16 border rounded-md px-2 py-1 font-nunito text-white">
                 <p className="mt-0 font-gyparodysemi">Game Id: 1209</p>
                 <p className="-mt-1">Turn #: 24</p>
                 <p className="-mt-1">Player 1: 0xy98whfoi982398h3v4knwlef92</p>
@@ -457,7 +559,7 @@ export default function Home() {
           )}
         </TransformWrapper>
 
-        <div className="font-nunito absolute bottom-6 space-x-0 lg:space-x-2 space-y-2 lg:space-y-0 flex flex-col lg:flex-row items-center justify-center inset-x-0">
+        <div className="font-nunito absolute bottom-8 space-x-0 lg:space-x-2 space-y-1 lg:space-y-0 flex flex-col lg:flex-row items-center justify-center inset-x-0">
           <div className="">
             <PlayModal />
           </div>
@@ -469,6 +571,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       <div className="w-full justify-center  flex flex-col items-center">
         <div className="h-96 rounded-md w-3/4 p-5 bg-gradient-to-b from-green-400 to-emerald-500 mt-4">
           <p className="font-gyparody font-bold text-white text-6xl mt-8 w-full flex-mx-auto text-center justify-center">
