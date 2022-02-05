@@ -188,7 +188,7 @@ export default function IndexPage() {
                   </ul>
                 </div>
               </div>
-              <div className="absolute bottom-4 inset-x-0	flex mx-auto justify-center">
+              <div className="hidden absolute bottom-4 inset-x-0	flex mx-auto justify-center">
                 <Switcher />
               </div>
             </div>
@@ -345,7 +345,7 @@ export default function IndexPage() {
                 <div className="flex text-th-primary-dark items-center">
                   <Account triedToEagerConnect={triedToEagerConnect} />
                   <div>
-                    <div className="translate-x-1">
+                    <div className="hidden translate-x-1">
                       <Switcher />
                     </div>
                   </div>

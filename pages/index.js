@@ -13,6 +13,8 @@ import {
   TransformComponent
 } from "@tiendeo/react-zoom-pan-pinch";
 
+import { positions } from "../components/Samples/Outline";
+
 import ETHBalance from "../components/Utils/ETHBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
 import usePersonalSign, { hexlify } from "../hooks/usePersonalSign";
@@ -39,6 +41,13 @@ export default function Home() {
   let [isPlayOpen, setIsPlayOpen] = useState(false);
   let [isBuyOpen, setIsBuyOpen] = useState(false);
   let [isClaimOpen, setIsClaimOpen] = useState(false);
+
+  let [CharPos, setCharPos] = useState([1, 13, 26]);
+  let [MoveX, setMoveX] = useState(0);
+  let [MoveY, setMoveY] = useState(0);
+  let [Face, setFace] = useState("R");
+
+  let [Selected, setSelected] = useState(0);
 
   function closePlayModal() {
     setIsPlayOpen(false);
@@ -67,15 +76,6 @@ export default function Home() {
   const { account, library } = useWeb3React();
 
   const triedToEagerConnect = useEagerConnect();
-
-  const sign = usePersonalSign();
-
-  const handleSign = async () => {
-    const msg = "Whitelisted for Anthropos";
-    const sig = await sign(msg);
-    console.log(sig);
-    console.log("isValid", verifyMessage(msg, sig) === account);
-  };
 
   const isConnected = typeof account === "string" && !!library;
 
@@ -339,45 +339,184 @@ export default function Home() {
 
   const boxRef = useRef();
 
-  let [MoveX, setMoveX] = useState(0);
-  let [MoveY, setMoveY] = useState(0);
-  let [Face, setFace] = useState("R");
+  function MoveRight(CharId) {
+    if (Face === "L") {
+      Flip();
+    }
 
-  function MoveRight() {
-    gsap.fromTo(
-      boxRef.current,
-      {
-        repeat: 2,
-        rotation: 3,
-        duration: 0.25,
-        transformOrigin: "bottom center",
-        ease: "linear",
-        yoyo: true
-      },
-      {
-        ease: "linear",
-        repeat: 2,
-        duration: 0.25,
-        rotation: -3,
-        transformOrigin: "bottom center",
-        yoyo: true
-      }
-    );
+    if (positions[CharPos[Selected]].r === true) {
+      gsap.fromTo(
+        boxRef.current,
+        {
+          repeat: 2,
+          rotation: 3,
+          duration: 0.25,
+          transformOrigin: "bottom center",
+          ease: "linear",
+          yoyo: true
+        },
+        {
+          ease: "linear",
+          repeat: 2,
+          duration: 0.25,
+          rotation: -3,
+          transformOrigin: "bottom center",
+          yoyo: true
+        }
+      );
 
-    gsap.to(boxRef.current, {
-      duration: 1,
-      x: MoveX + 50,
-      y: MoveY + 20
-    });
-    setMoveX(MoveX + 50);
-    setMoveY(MoveY + 20);
-    gsap.to(boxRef.current, {
-      delay: 0.75,
-      duration: 0.1,
-      rotation: 0,
-      transformOrigin: "bottom center",
-      ease: "linear"
-    });
+      gsap.to(boxRef.current, {
+        duration: 1,
+        x: MoveX + 50,
+        y: MoveY + 20
+      });
+      setMoveX(MoveX + 50);
+      setMoveY(MoveY + 20);
+      gsap.to(boxRef.current, {
+        delay: 0.75,
+        duration: 0.1,
+        rotation: 0,
+        transformOrigin: "bottom center",
+        ease: "linear"
+      });
+      CharPos[0] = CharPos[0] + 1;
+    }
+    console.log("Character 1 Position", CharPos[0]);
+  }
+
+  function MoveLeft(CharId) {
+    if (Face === "R") {
+      Flip();
+    }
+    console.log("Left Move?", positions[CharPos[Selected]].l);
+    if (positions[CharPos[Selected]].l === true) {
+      gsap.fromTo(
+        boxRef.current,
+        {
+          repeat: 2,
+          rotation: 3,
+          duration: 0.25,
+          transformOrigin: "bottom center",
+          ease: "linear",
+          yoyo: true
+        },
+        {
+          ease: "linear",
+          repeat: 2,
+          duration: 0.25,
+          rotation: -3,
+          transformOrigin: "bottom center",
+          yoyo: true
+        }
+      );
+
+      gsap.to(boxRef.current, {
+        duration: 1,
+        x: MoveX - 50,
+        y: MoveY - 20
+      });
+      setMoveX(MoveX - 50);
+      setMoveY(MoveY - 20);
+      gsap.to(boxRef.current, {
+        delay: 0.75,
+        duration: 0.1,
+        rotation: 0,
+        transformOrigin: "bottom center",
+        ease: "linear"
+      });
+      CharPos[Selected] = CharPos[Selected] - 1;
+    }
+    console.log("Character 1 Position", CharPos[Selected]);
+  }
+
+  function MoveDown(CharId) {
+    if (Face === "R") {
+      Flip();
+    }
+    console.log("Down Move?", positions[CharPos[Selected]].d);
+    if (positions[CharPos[Selected]].d === true) {
+      gsap.fromTo(
+        boxRef.current,
+        {
+          repeat: 2,
+          rotation: 3,
+          duration: 0.25,
+          transformOrigin: "bottom center",
+          ease: "linear",
+          yoyo: true
+        },
+        {
+          ease: "linear",
+          repeat: 2,
+          duration: 0.25,
+          rotation: -3,
+          transformOrigin: "bottom center",
+          yoyo: true
+        }
+      );
+
+      gsap.to(boxRef.current, {
+        duration: 1,
+        x: MoveX - 50,
+        y: MoveY + 20
+      });
+      setMoveX(MoveX - 50);
+      setMoveY(MoveY + 20);
+      gsap.to(boxRef.current, {
+        delay: 0.75,
+        duration: 0.1,
+        rotation: 0,
+        transformOrigin: "bottom center",
+        ease: "linear"
+      });
+      CharPos[Selected] = CharPos[Selected] + 8;
+    }
+    console.log("Character 1 Position", CharPos[Selected]);
+  }
+
+  function MoveUp(CharId) {
+    if (Face === "L") {
+      Flip();
+    }
+    console.log("Left Move?", positions[CharPos[Selected]].u);
+    if (positions[CharPos[Selected]].u === true) {
+      gsap.fromTo(
+        boxRef.current,
+        {
+          repeat: 2,
+          rotation: 3,
+          duration: 0.25,
+          transformOrigin: "bottom center",
+          ease: "linear",
+          yoyo: true
+        },
+        {
+          ease: "linear",
+          repeat: 2,
+          duration: 0.25,
+          rotation: -3,
+          transformOrigin: "bottom center",
+          yoyo: true
+        }
+      );
+
+      gsap.to(boxRef.current, {
+        duration: 1,
+        x: MoveX + 50,
+        y: MoveY - 20
+      });
+      setMoveX(MoveX + 50);
+      setMoveY(MoveY - 20);
+      gsap.to(boxRef.current, {
+        delay: 0.75,
+        duration: 0.1,
+        rotation: 0,
+        transformOrigin: "bottom center",
+        ease: "linear"
+      });
+      CharPos[Selected] = CharPos[Selected] - 8;
+    }
+    console.log("Character 1 Position", CharPos[Selected]);
   }
 
   function Flip() {
@@ -395,15 +534,6 @@ export default function Home() {
       });
       setFace("R");
     }
-  }
-
-  function MoveLeft() {
-    gsap.to(boxRef.current, {
-      x: MoveX - 50,
-      y: MoveY - 20
-    });
-    setMoveX(MoveX - 50);
-    setMoveY(MoveY - 20);
   }
 
   return (
@@ -445,200 +575,13 @@ export default function Home() {
             resetTransform,
             setTransform,
             zoomToElement,
+            centerView,
+            testf,
             ...rest
           }) => (
             <>
               <div className="font-lores text-slate-400 spacing-x-3 absolute right-2 top-4 z-50">
                 <button onClick={() => resetTransform()}>X</button>
-              </div>
-              <div className="absolute right-6  top-6 z-30 flex grid gap-0.5 grid-rows-8 grid-cols-8 ml-12 spacing-x-3 z-50">
-                <button
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * 20),
-                      -((ref.current.offsetHeight / 10) * 5),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                />
-
-                {/* X + 2.5 \ Y + 1.5 */}
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 1)),
-                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 1)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                {/* X + 2.5 \ Y + 1.5 */}
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 2)),
-                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 2)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 3)),
-                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 3)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 4)),
-                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 4)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 5)),
-                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 5)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 6)),
-                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 6)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (20 + 2.5 * 7)),
-                      -((ref.current.offsetHeight / 10) * (5 + 1.75 * 7)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * 17.5),
-                      -((ref.current.offsetHeight / 10) * 6.75),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 1)),
-                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 1)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 2)),
-                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 2)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 3)),
-                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 3)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 1)),
-                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 1)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 1)),
-                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 1)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 1)),
-                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 1)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                <div
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (17.5 + 2.5 * 1)),
-                      -((ref.current.offsetHeight / 10) * (6.75 + 1.75 * 1)),
-                      5
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-amber-400"
-                ></div>
-                {/* Zoom TEN */}
-                <div
-                  className="hidden"
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * (20 * 2.25)),
-                      -((ref.current.offsetHeight / 10) * (5 * 2.75)),
-                      10
-                    )
-                  }
-                  className="hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
-                ></div>
-                {/* Zoom 20 */}
-                <div
-                  className="hidden"
-                  onClick={() =>
-                    setTransform(
-                      -((ref.current.offsetWidth / 10) * 95),
-                      -((ref.current.offsetHeight / 10) * 31),
-                      20
-                    )
-                  }
-                  className="hidden hover:bg-slate-200 cursor-pointer h-2.5 w-2.5 bg-slate-400"
-                ></div>
               </div>
 
               <div className="relative object-center flex w-full mx-auto justify-center h-152 object-cover ">
@@ -651,14 +594,13 @@ export default function Home() {
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 1000 550"
                         >
-                          <g onClick={MoveRight}>
+                          <g ref={boxRef}>
                             <g
                               stroke="#010101"
                               strokeLinecap="round"
                               strokeLinejoin="round"
                               data-name="Layer 3"
                               className="cursor-pointer"
-                              ref={boxRef}
                             >
                               <path
                                 fill="#849558"
@@ -776,6 +718,26 @@ export default function Home() {
                   </p>
                   <p onClick={Flip} className="-mt-1">
                     Turn #: 24
+                  </p>
+                  <p
+                    onClick={MoveUp}
+                    className="mx-3 pl-1.5 ml-5  transform translate-y-2 cursor-pointer"
+                  >
+                    ↑
+                  </p>
+                  <div className="flex">
+                    <p onClick={MoveLeft} className="mx-2  cursor-pointer">
+                      ←
+                    </p>
+                    <p onClick={MoveRight} className="mx-2 cursor-pointer">
+                      →
+                    </p>
+                  </div>
+                  <p
+                    onClick={MoveDown}
+                    className="mx-3 pl-1.5 ml-5 transform -translate-y-2 cursor-pointer"
+                  >
+                    ↓
                   </p>
                 </div>
               </div>
