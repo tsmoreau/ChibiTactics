@@ -43,9 +43,10 @@ export default function Home() {
   let [isClaimOpen, setIsClaimOpen] = useState(false);
 
   let [CharPos, setCharPos] = useState([4, 5, 60, 61]);
+  let [CharFace, setCharFace] = useState([1, 1, 0, 0]);
   let [MoveX, setMoveX] = useState(0);
   let [MoveY, setMoveY] = useState(0);
-  let [Face, setFace] = useState("R");
+  let [Face, setFace] = useState(0);
 
   let [Selected, setSelected] = useState(0);
 
@@ -344,7 +345,7 @@ export default function Home() {
 
   let [SelectRef, setSelectRef] = useState(char01);
 
-  function SetupBoard(Char, Loc) {
+  function SetupBoard(CharId, Char, Loc) {
     gsap.to(Char.current, {
       duration: 1,
       x: positions[Loc].x,
@@ -359,15 +360,20 @@ export default function Home() {
   }
 
   useEffect(() => {
-    SetupBoard(char01, CharPos[0]);
-    SetupBoard(char02, CharPos[1]);
-    SetupBoard(char03, CharPos[2]);
-    SetupBoard(char04, CharPos[3]);
+    SetupBoard(0, char01, CharPos[0]);
+    SetupBoard(1, char02, CharPos[1]);
+    SetupBoard(2, char03, CharPos[2]);
+    SetupBoard(3, char04, CharPos[3]);
   }, []);
 
   function MoveRight(CharId) {
-    if (Face === "L") {
-      Flip();
+    console.log("Face", CharFace[Selected]);
+    if (CharFace[Selected] === 1) {
+      gsap.to(SelectRef.current, {
+        transformOrigin: "bottom center",
+        scaleX: 1
+      });
+      CharFace[Selected] = 0;
     }
 
     if (
@@ -424,8 +430,12 @@ export default function Home() {
   }
 
   function MoveLeft(CharId) {
-    if (Face === "R") {
-      Flip();
+    if (CharFace[Selected] === 0) {
+      gsap.to(SelectRef.current, {
+        transformOrigin: "bottom center",
+        scaleX: -1
+      });
+      CharFace[Selected] = 1;
     }
 
     if (
@@ -476,8 +486,12 @@ export default function Home() {
   }
 
   function MoveDown(CharId) {
-    if (Face === "R") {
-      Flip();
+    if (CharFace[Selected] === 0) {
+      gsap.to(SelectRef.current, {
+        transformOrigin: "bottom center",
+        scaleX: 1
+      });
+      CharFace[Selected] = 1;
     }
 
     if (
@@ -528,8 +542,12 @@ export default function Home() {
   }
 
   function MoveUp(CharId) {
-    if (Face === "L") {
-      Flip();
+    if (CharFace[Selected] === 1) {
+      gsap.to(SelectRef.current, {
+        transformOrigin: "bottom center",
+        scaleX: 1
+      });
+      CharFace[Selected] = 0;
     }
 
     if (
@@ -580,20 +598,25 @@ export default function Home() {
   }
 
   function Flip() {
-    if (Face === "R") {
-      gsap.to(SelectRef.current, {
-        transformOrigin: "bottom center",
-        scaleX: -1
-      });
-      setFace("L");
-    }
-    if (Face === "L") {
+    console.log("TestFace", CharFace[Selected]);
+
+    if (CharFace[Selected] === 1) {
+      console.log("TESTL");
       gsap.to(SelectRef.current, {
         transformOrigin: "bottom center",
         scaleX: 1
       });
-      setFace("R");
+      CharFace[Selected] = 1;
     }
+    if (CharFace[Selected] === 0) {
+      console.log("TESTL");
+      gsap.to(SelectRef.current, {
+        transformOrigin: "bottom center",
+        scaleX: -1
+      });
+      CharFace[Selected] = 2;
+    }
+    console.log("TestFace12", CharFace[Selected]);
   }
 
   return (
