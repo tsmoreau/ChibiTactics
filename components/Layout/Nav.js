@@ -72,7 +72,7 @@ export default function IndexPage() {
           <Account triedToEagerConnect={triedToEagerConnect} />
         </Popover.Button>
 
-        <Popover.Panel className="font-thin tracking-wide rounded z-40 font-lores font-normal text-xl text-th-primary-dark rounded-lg border border-th-accent-light w-48 absolute right-0 translate-y-4 z-10 bg-th-background">
+        <Popover.Panel className="font-thin tracking-wide rounded z-40 font-lores font-normal text-xl text-th-primary-dark rounded-lg border border-th-accent-light w-48 absolute right-0 translate-y-4 z-10 bg-white">
           <div className="flex flex-col">
             <a
               className="w-full py-4 hover:bg-green-200 hover:text-white "
@@ -117,7 +117,7 @@ export default function IndexPage() {
             className=" bg-gray-800 opacity-50 w-full h-full"
             onClick={() => setShow(!show)}
           />
-          <div className="w-64 z-40 fixed z-40 top-0 bg-th-background shadow h-full flex-col justify-between lg:hidden pb-4 transition duration-150 ease-in-out">
+          <div className="w-64 z-40 fixed z-40 top-0 bg-sky-200 shadow h-full flex-col justify-between lg:hidden pb-4 transition duration-150 ease-in-out">
             <div className="relative px-6 h-full">
               <div className="flex flex-col justify-between h-full w-full">
                 <div>
@@ -204,7 +204,7 @@ export default function IndexPage() {
             <div className="h-px -mt-0.5"></div>
           ) : (
             <div>
-              <div className="font-molle text-2xl h-16 pt-0.5 bg-th-background px-6 w-full flex lg:hidden justify-between items-center  top-0 z-40">
+              <div className="font-molle text-2xl h-16 pt-0.5 bg-white px-6 w-full flex lg:hidden justify-between items-center  top-0 z-40">
                 <a href="/">
                   <a href="/">
                     <p className="text-3xl   mb-0 bg-gradient-to-b from-green-400  to-emerald-600 text-transparent bg-clip-text font-gyparody tracking-tight font-extrabold">
@@ -308,17 +308,17 @@ export default function IndexPage() {
             <nav
               className={
                 isShrunk
-                  ? "h-16 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-th-background top-0 z-50"
-                  : "h-20 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-th-background top-0 z-50"
+                  ? "h-16 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-white top-0 z-50"
+                  : "h-20 transition duration-500 items-center text-center text-base  py-4 shadow-none pl-8 px-6 w-full flex justify-between bg-white top-0 z-50"
               }
             >
               <div className="flex -ml-4 flex-col h-10 items-center justify-center translate-y-0">
                 <a href="/">
-                  <p className="text-5xl drop-shadow-sm mb-0 bg-gradient-to-b from-green-400  to-emerald-600 text-transparent bg-clip-text font-gyparody tracking-tight font-extrabold">
+                  <p className="text-5xl drop-shadow-sm mb-0 bg-gradient-to-b from-teal-400 to-sky-800 text-transparent bg-clip-text font-gyparody tracking-tight font-extrabold">
                     CHIBI TACTICS!
                   </p>
-                  <div className="hidden bg-emerald-500  h-px w-11/12 flex mx-auto"></div>
-                  <p className="hidden w-full flex mx-auto justify-center text-center  text-xs mb-0 text-emerald-600 font-gyparody font-extrabold tracking-wide">
+                  <div className="hidden -my-0.5 bg-sky-800 h-px w-11/12 flex mx-auto"></div>
+                  <p className="hidden w-full flex mx-auto justify-center text-center  text-xs mb-0 text-sky-800 font-lores font-bold tracking-wide">
                     ON-CHAIN TURN-BASED STRATEGY
                   </p>
                 </a>

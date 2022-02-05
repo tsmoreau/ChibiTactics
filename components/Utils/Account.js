@@ -53,7 +53,7 @@ const Account = ({ triedToEagerConnect }) => {
       <div>
         {hasMetaMaskOrWeb3Available ? (
           <button
-            className="flex font-lores font-normal px-5 py-2 text-lg items-center font-medium text-white bg-gradient-to-b from-green-400  to-emerald-500 rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            className="flex font-lores font-normal px-5 py-2 text-lg items-center font-medium text-white bg-gradient-to-b from-teal-400 to-sky-800 rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
             onClick={() => {
               setConnecting(true);
 
@@ -84,7 +84,7 @@ const Account = ({ triedToEagerConnect }) => {
   }
 
   return (
-    <div className="border border-1.5 border-stone-300 font-lores flex font-normal px-6 py-1 text-lg items-center font-medium text-white bg-gradient-to-b from-green-400  to-emerald-500 rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+    <div className="border border-1.5 border-stone-300 font-lores flex font-normal px-6 py-1 text-lg items-center font-medium text-white bg-gradient-to-b from-teal-400 to-sky-800 rounded-md  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
       {ENSName || `${shortenHex(account, 4)}`}
       <svg
         width="12"
