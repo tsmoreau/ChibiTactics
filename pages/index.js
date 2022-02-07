@@ -378,7 +378,11 @@ export default function Home() {
 
     if (
       (positions[CharPos[Selected]].r === true) &
-      (positions[CharPos[Selected] + 1].content === null)
+      ((positions[CharPos[Selected] + 1].content === null) &
+        (CharPos[Selected] + 1 !== CharPos[0]) &
+        (CharPos[Selected] + 1 !== CharPos[1]) &
+        (CharPos[Selected] + 1 !== CharPos[2]) &
+        (CharPos[Selected] + 1 !== CharPos[3]))
     ) {
       gsap.fromTo(
         SelectRef.current,
@@ -440,7 +444,11 @@ export default function Home() {
 
     if (
       (positions[CharPos[Selected]].l === true) &
-      (positions[CharPos[Selected] - 1].content === null)
+      ((positions[CharPos[Selected] - 1].content === null) &
+        (CharPos[Selected] - 1 !== CharPos[0]) &
+        (CharPos[Selected] - 1 !== CharPos[1]) &
+        (CharPos[Selected] - 1 !== CharPos[2]) &
+        (CharPos[Selected] - 1 !== CharPos[3]))
     ) {
       gsap.fromTo(
         SelectRef.current,
@@ -496,7 +504,11 @@ export default function Home() {
 
     if (
       (positions[CharPos[Selected]].d === true) &
-      (positions[CharPos[Selected] + 8].content === null)
+      ((positions[CharPos[Selected] + 8].content === null) &
+        (CharPos[Selected] + 8 !== CharPos[0]) &
+        (CharPos[Selected] + 8 !== CharPos[1]) &
+        (CharPos[Selected] + 8 !== CharPos[2]) &
+        (CharPos[Selected] + 8 !== CharPos[3]))
     ) {
       gsap.fromTo(
         SelectRef.current,
@@ -552,7 +564,11 @@ export default function Home() {
 
     if (
       (positions[CharPos[Selected]].u === true) &
-      (positions[CharPos[Selected] - 8].content === null)
+      ((positions[CharPos[Selected] - 8].content === null) &
+        (CharPos[Selected] - 8 !== CharPos[0]) &
+        (CharPos[Selected] - 8 !== CharPos[1]) &
+        (CharPos[Selected] - 8 !== CharPos[2]) &
+        (CharPos[Selected] - 8 !== CharPos[3]))
     ) {
       gsap.fromTo(
         SelectRef.current,
@@ -600,23 +616,19 @@ export default function Home() {
   function Flip() {
     console.log("TestFace", CharFace[Selected]);
 
-    if (CharFace[Selected] === 1) {
-      console.log("TESTL");
+    if (CharFace[Selected] === 0) {
       gsap.to(SelectRef.current, {
         transformOrigin: "bottom center",
         scaleX: 1
       });
       CharFace[Selected] = 1;
-    }
-    if (CharFace[Selected] === 0) {
-      console.log("TESTL");
+    } else if (CharFace[Selected] === 1) {
       gsap.to(SelectRef.current, {
         transformOrigin: "bottom center",
         scaleX: -1
       });
-      CharFace[Selected] = 2;
+      CharFace[Selected] = 0;
     }
-    console.log("TestFace12", CharFace[Selected]);
   }
 
   return (
@@ -670,6 +682,19 @@ export default function Home() {
                   height="24"
                   viewBox="0 0 24 24"
                   className="fill-slate-400 mb-1"
+                  onClick={() =>
+                    setTransform(
+                      -(
+                        (ref.current.offsetWidth / 10) *
+                        positions[CharPos[Selected]].x2
+                      ),
+                      -(
+                        (ref.current.offsetHeight / 10) *
+                        positions[CharPos[Selected]].y2
+                      ),
+                      5
+                    )
+                  }
                 >
                   <path d="M21.172 24l-7.387-7.387c-1.388.874-3.024 1.387-4.785 1.387-4.971 0-9-4.029-9-9s4.029-9 9-9 9 4.029 9 9c0 1.761-.514 3.398-1.387 4.785l7.387 7.387-2.828 2.828zm-12.172-8c3.859 0 7-3.14 7-7s-3.141-7-7-7-7 3.14-7 7 3.141 7 7 7z" />{" "}
                 </svg>
